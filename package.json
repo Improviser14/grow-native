@@ -1,0 +1,15 @@
+{
+  "name": "grow_native",
+  "version": "1.0.0",
+  "description": "mom's app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "grow",
+    "native"
+  ],
+  "author": "Christopher Galvan",
+  "license": "MIT"
+}
