@@ -1,9 +1,9 @@
 const dotenv = require("dotenv").config(),
-      express = require("express"),
-      app = express(),
-      router = express.Router(),
-      httpsLocalhost = require("https-localhost"),
-      serveStatic = require("serve-static");
+  express = require("express"),
+  app = express(),
+  router = express.Router(),
+  httpsLocalhost = require("https-localhost"),
+  serveStatic = require("serve-static");
 
 //ssl must be configured on the application level --here
 //uncomment this block when deploying see code at the bottom of this file
@@ -30,9 +30,8 @@ app.get("/bio", function(req, res) {
 });
 
 app.get("/show", function(req, res) {
-    res.render("show");
-  });
-
+  res.render("show");
+});
 
 if (process.env.ENVIRONMENT === "prod") {
   // sets port 8080 to default or unless otherwise specified in the environment
@@ -42,40 +41,36 @@ if (process.env.ENVIRONMENT === "prod") {
   app.listen(8080, "127.0.0.1");
 }
 
-//serve stylesheets/css files 
-app.use(express.static('public/'));
+//serve stylesheets/css files
+app.use(express.static("public/"));
 
-app.get('/', function(req, res){
-    console.log("Rendering Landing");
-    res.render('landing');
+app.get("/", function(req, res) {
+  console.log("Rendering Landing");
+  res.render("landing");
 });
 
-app.get('#', function(req, res){
-    res.render('#');
+app.get("#", function(req, res) {
+  res.render("#");
 });
 
-app.get('/#, function(req, res){
-    res.render('#');
+app.get("/#", function(req, res) {
+  res.render("#");
 });
 
-
-app.get('/#', function(req, res){
-    res.render('cars');
+app.get("/#", function(req, res) {
+  res.render("cars");
 });
 
-
-
-app.get('/cw', function(req, res){
-    res.render('cw');
+app.get("/cw", function(req, res) {
+  res.render("cw");
 });
 
-app.get('/bio', function(req, res){
-    res.render('bio');
+app.get("/bio", function(req, res) {
+  res.render("bio");
 });
 
-app.use("/contact", contactRoutes);
+// app.use("/contact", contactRoutes);
 
 app.listen(process.env.PORT, process.env.IP);
 
-
-
+console.log("Grow Native is running on the local environment");

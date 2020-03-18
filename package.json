@@ -11,5 +11,11 @@
     "native"
   ],
   "author": "Christopher Galvan",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "https-localhost": "^4.5.2",
+    "serve-static": "^1.14.1"
+  }
 }

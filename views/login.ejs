@@ -1,0 +1,33 @@
+<% include ./partials/header %>
+
+<!-- change classes to bootstrap not sematic ui -->
+
+<div class="ui one column centered grid">
+  <form action="/login" method="post">
+    <div class="column" id="col1">
+      <div class="ui vertical segment">
+        <div class="ui input">
+          <input type="text" name="username" placeholder="username" />
+        </div>
+      </div>
+    </div>
+
+    <div class="column" id="col2">
+      <div class="ui vertical segment">
+        <div class="ui input">
+          <input type="password" name="password" placeholder="password" />
+        </div>
+      </div>
+    </div>
+
+    <div class="column" id="col4">
+      <div class="ui vertical segment">
+        <div class="ui input">
+          <button class="ui inverted violet button">login</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<% include ./partials/footer %>

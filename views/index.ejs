@@ -1,0 +1,43 @@
+<% include ./partials/header %>
+
+<div class="ui main text container">
+  <% if(currentUser && currentUser.isAdmin){ %>
+  <h1>
+    <%= currentUser.username %> is authorized to edit and delete blog posts!!!
+  </h1>
+  <% } %>
+
+  <div class="ui top attached segment">
+    <div class="ui divided items">
+      <% blogs.forEach(function(blog){ %>
+      <div class="item">
+        <div class="ui medium image">
+          <img src="<%= blog.image %>" />
+        </div>
+        <div class="content">
+          <a class="header" id="header" href="/index/<%= blog._id %>"
+            ><%=blog.title%></a
+          >
+          <div class="meta">
+            <span><%= blog.created.toDateString() %></span>
+          </div>
+          <div class="description">
+            <p><%- blog.body.substring(0, 100) %>...</p>
+          </div>
+          <div class="extra">
+            <a
+              class="ui floated basic violet button"
+              href="/index/<%= blog._id %>"
+            >
+              Read More
+              <i class="right coffee icon"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
+<% include ./partials/footer %>
