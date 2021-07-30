@@ -33,24 +33,11 @@ if (process.env.ENVIRONMENT === "prod") {
   });
 }
 
-// mongoose.connect(process.env.DATABASE_URL, {
-//   useNewUrlParser: true,
-//   useCreateIndex: true,
-//   useFindAndModify: false,
-//   useUnifiedTopology: true
-// });
-
-mongoose
-     .connect( process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+mongoose.connect( process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
      .then(() => console.log( 'Database Connected' ))
      .catch(err => console.log( err ));
 
 
-
-
-// mongoose.connect( uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
-//      .then(() => console.log( 'Database Connected' ))
-//      .catch(err => console.log( err ));
 
 mongoose.set("useFindAndModify", false);
 app.set("view engine", "ejs");
@@ -73,9 +60,6 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: true }
   }));
-
-
-
 
 
 app.use(passport.initialize());
@@ -259,6 +243,9 @@ app.get("/bio", function (req, res) {
 app.get("/", function (req, res) {
   res.render("landing");
 });
+
+// app.set('port', (process.env.PORT || 5000));
+
 
 
 // app.use("/contact", contactRoutes);
