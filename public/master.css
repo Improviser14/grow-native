@@ -1,0 +1,101 @@
+/* landing page css */
+html * {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.background{
+  background-image: url("https://images.unsplash.com/photo-1565041222041-db9ebdda950a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80");
+}
+
+
+
+/* blog css */
+
+i.icon {
+  font-size: 2em;
+  padding-top: 0.3em;
+}
+
+.container.main {
+  margin-top: 7em;
+  padding-top: 1.5em;
+}
+
+form {
+  padding-top: 80px;
+}
+
+
+
+.container {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.fixed-menu {
+  padding-top: 10px;
+}
+
+#delete {
+  display: inline;
+}
+
+.ui .items .item .image {
+  position: relative;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  display: block;
+  float: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* #logo {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    height: auto;
+} */
+
+.date {
+  font-style: italic;
+}
+
+.meta {
+  margin-top: 20px;
+}
+
+#header {
+  font-style: italic;
+  letter-spacing:  inherit;
+  font-size: medium
+;
+/* #header a {
+  font-style: italic;
+  font-size: medium;
+} */
+
+
+#col1 {
+  margin-top: 60px;
+  padding-top: 60px;
+}
+
+#col4 {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.basic.button {
+  margin: 1em;
+}
+
+.description a {
+  font-size: 15px;
+}
+
+.description p {
+  padding: 5px;
+  letter-spacing:  normal;
+}

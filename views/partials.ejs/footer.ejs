@@ -1,0 +1,21 @@
+<div class="ui bottom menu">
+  <div class="ui container">
+    <% if(!currentUser) { %>
+      <a href="/login" class="item">Login</a>
+      <!--comment out this line once everyone is given admin priviledges -->
+      <!-- <a href="/register" class="item">New User</a> -->
+      <% } else { %>
+        <a href="/logout" class="item">Logout</a>
+        <a href="#" class="item"> Signed in as
+          <%= currentUser.username %>
+        </a>
+
+
+        <% } %>
+  </div>
+</div>
+
+
+</body>
+
+</html>

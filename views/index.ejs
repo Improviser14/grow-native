@@ -1,43 +1,108 @@
-<% include ./partials/header %>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="ui main text container">
-  <% if(currentUser && currentUser.isAdmin){ %>
-  <h1>
-    <%= currentUser.username %> is authorized to edit and delete blog posts!!!
-  </h1>
-  <% } %>
+<head>
+  <title>Grow Native</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="/master.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+</head>
 
-  <div class="ui top attached segment">
-    <div class="ui divided items">
-      <% blogs.forEach(function(blog){ %>
-      <div class="item">
-        <div class="ui medium image">
-          <img src="<%= blog.image %>" />
-        </div>
-        <div class="content">
-          <a class="header" id="header" href="/index/<%= blog._id %>"
-            ><%=blog.title%></a
-          >
-          <div class="meta">
-            <span><%= blog.created.toDateString() %></span>
-          </div>
-          <div class="description">
-            <p><%- blog.body.substring(0, 100) %>...</p>
-          </div>
-          <div class="extra">
-            <a
-              class="ui floated basic violet button"
-              href="/index/<%= blog._id %>"
-            >
-              Read More
-              <i class="right coffee icon"></i>
-            </a>
-          </div>
-        </div>
+<body>
+  <div class="ui fixed menu">
+    <div class="ui container">
+      <div>
+        <div id="logo-div"><a class="navbar-brand" href="/">
+            <img src="/images/cover.png" style="width: 80px; height: 60px;" /></a></div>
       </div>
-      <% }) %>
+      <div class="header item"><i class="leaf icon"></i><a href="/index" class="item">Rose's Blog</a></div>
+      <!--<a href="/" class="item">THP homepage</a>-->
+      <a href="/new" class="item">New Post</a>
     </div>
   </div>
-</div>
 
-<% include ./partials/footer %>
+  <div class="ui main text container">
+    <% if(currentUser && currentUser.isAdmin){ %>
+      <h1>
+        <%= currentUser.username %> has admin priviledges and is authorized to edit and delete blog posts.
+      </h1>
+      <% } %>
+
+        <div class="ui top attached segment">
+          <div class="ui divided items">
+            <% blogs.forEach(function(blog){ %>
+
+              <div class="item">
+
+                <div class="ui medium image">
+                  <img src="<%= blog.image %>" />
+                </div>
+
+                <div class="content">
+                  <a class="header" id="header" href="/index/<%= blog._id %>">
+                    <%= blog.title %>
+                  </a>
+
+                  <div class="meta">
+                    <span>
+                      <%= blog.created.toDateString() %>
+                    </span>
+                  </div>
+
+                  <div class="description">
+                    <p>
+                      <%- blog.body.substring(0, 100) %>...
+                    </p>
+                  </div>
+
+                  <div class="extra">
+                    <a class="ui floated basic green button" href="/index/<%= blog._id %>">
+                      Read More
+                      <i class="right leaf icon"></i>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+              <% }) %>
+          </div>
+        </div>
+  </div>
+
+
+
+  <div class="ui bottom menu">
+    <div class="ui container">
+      <% if(!currentUser) { %>
+        <a href="/login" class="item">Login</a>
+        <!--comment out this line once everyone is given admin priviledges -->
+        <a href="/register" class="item">New User</a>
+        <% } else { %>
+          <a href="/logout" class="item">Logout</a>
+          <a href="#" class="item"> Signed in as
+            <%= currentUser.username %>
+          </a>
+
+
+          <% } %>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

@@ -1,3 +1,5 @@
+<!--comment out this page, but keep it once all members are given admin priviledges.-->
+<!--Also comment out register routes(Get and Post routes) in app.js-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,47 +31,19 @@
         <div id="logo-div"><a class="navbar-brand" href="/">
             <img src="/images/cover.png" style="width: 80px; height: 60px;" /></a></div>
       </div>
-      <div class="header item"><i class="leaf icon"></i><a href="/index" class="item">Rose's Blog</a></div>
+      <div class="header item"><i class="leaf icon"></i><a href="/index" class="item" target="_blank">Rose's Blog</a>
+      </div>
       <!--<a href="/" class="item">THP homepage</a>-->
       <a href="/new" class="item">New Post</a>
     </div>
   </div>
-
-  <div class="ui one column centered grid">
-    <form id="loginForm" action="/login" method="post">
-      <div class="column" id="col1">
-        <div class="ui vertical segment">
-          <div class="ui input">
-            <input type="text" name="username" placeholder="username">
-          </div>
-        </div>
-      </div>
-
-      <div class="column" id="col2">
-        <div class="ui vertical segment">
-          <div class="ui input">
-            <input type="password" name="password" placeholder="password">
-          </div>
-        </div>
-      </div>
-
-      <div class="column" id="col4">
-        <div class="ui vertical segment">
-          <div class="ui input">
-            <button class="ui inverted violet button">login</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-
 
   <div class="ui bottom menu">
     <div class="ui container">
       <% if(!currentUser) { %>
         <a href="/login" class="item">Login</a>
         <!--comment out this line once everyone is given admin priviledges -->
-        <!-- <a href="/register" class="item">New User</a> -->
+        <a href="/register" class="item">New User</a>
         <% } else { %>
           <a href="/logout" class="item">Logout</a>
           <a href="#" class="item"> Signed in as
@@ -85,3 +59,41 @@
 </body>
 
 </html>
+
+
+
+<div class="ui one column centered grid">
+  <form action="/register" method="post">
+    <div class="column" id="col1">
+      <div class="ui vertical segment">
+        <div class="ui input">
+          <input type="text" name="username" placeholder="username" />
+        </div>
+      </div>
+    </div>
+
+    <div class="column" id="col2">
+      <div class="ui vertical segment">
+        <div class="ui input">
+          <input type="password" name="password" placeholder="password" />
+        </div>
+      </div>
+    </div>
+
+    <div class="column" id="col3">
+      <div class="ui vertical segment">
+        <div class="ui input">
+          <input type="text" name="adminCode" placeholder="admin code" />
+        </div>
+      </div>
+    </div>
+
+    <div class="column" id="col4">
+      <div class="ui vertical segment">
+        <div class="ui input">
+          <button class="ui inverted violet button">register</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
