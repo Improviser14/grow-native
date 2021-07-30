@@ -50,7 +50,7 @@ mongoose
 //      .then(() => console.log( 'Database Connected' ))
 //      .catch(err => console.log( err ));
 
-// mongoose.set("useFindAndModify", false);
+mongoose.set("useFindAndModify", false);
 app.set("view engine", "ejs");
 
 app.use(bodyParser.json());
@@ -65,6 +65,15 @@ app.use(methodOverride("_method"));
 app.use(express.static("public/"));
 
 //passport config
+// app.use(
+//   require("express-session")({
+//     secret: process.env.secret,
+//     resave: false,
+//     saveUninitialized: false
+//   })
+// );
+
+//passport config
 app.use(
   require("express-session")({
     secret: process.env.secret,
@@ -72,6 +81,8 @@ app.use(
     saveUninitialized: false
   })
 );
+
+
 
 app.use(passport.initialize());
 app.use(passport.session());
