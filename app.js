@@ -2,6 +2,7 @@ var dotenv = require("dotenv").config(),
   bodyParser = require("body-parser"),
   express = require("express"),
   app = express(),
+  session = require('express-session'),
   
   // app = httpsLocalhost(),
   // expressSanitizer = require("express-sanitizer"),
@@ -66,22 +67,12 @@ app.use(methodOverride("_method"));
 app.use(express.static("public/"));
 
 //passport config
-// app.use(
-//   require("express-session")({
-//     secret: process.env.secret,
-//     resave: false,
-//     saveUninitialized: false
-//   })
-// );
-
-//passport config
-// app.use(
-//   require("express-session")({
-//     secret: process.env.secret,
-//     resave: false,
-//     saveUninitialized: false
-//   })
-// );s
+app.use(session({
+    secret: process.env.secret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  }));
 
 
 
