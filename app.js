@@ -90,6 +90,14 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+function sessionCleanup() {
+  sessionStore.all(function(err, sessions) {
+      for (var i = 0; i < sessions.length; i++) {
+          sessionStore.get(sessions[i], function() {} );
+      }
+  });
+}
+
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
   next();
