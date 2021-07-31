@@ -254,5 +254,5 @@ if (process.env.ENVIRONMENT === "prod") {
   app.set("port", process.env.PORT || 80);
   app.listen(app.get("port"));
 } else {
-  app.listen(8080, "127.0.0.1");
+  app.listen(8080, "0.0.0.0");
 }
