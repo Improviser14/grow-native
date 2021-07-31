@@ -42,9 +42,9 @@ mongoose.connect( process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIn
 mongoose.set("useFindAndModify", false);
 app.set("view engine", "ejs");
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(
-  bodyParser.urlencoded({
+  express.urlencoded({
     extended: true
   })
 );
