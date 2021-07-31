@@ -249,15 +249,15 @@ app.get("/", function (req, res) {
 // });
 
 
-// if (process.env.ENVIRONMENT === "prod") {
-  // sets port 8080 to default or unless otherwise specified in the environment
-//   app.set("port", process.env.PORT || 80);
-//   app.listen(app.get("port"));
-// } else {
-//   app.listen(8080, "0.0.0.0");
-// }
-
-
 if (process.env.ENVIRONMENT === "prod") {
-  app.listen(process.env.PORT || 5000);
+  sets port 8080 to default or unless otherwise specified in the environment
+  app.set("port", process.env.PORT || 80);
+  app.listen(app.get("port"));
+} else {
+  app.listen(8080, "0.0.0.0");
 }
+
+
+// if (process.env.ENVIRONMENT === "prod") {
+//   app.listen(process.env.PORT || 5000);
+// }
