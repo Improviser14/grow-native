@@ -1,30 +1,24 @@
 var dotenv = require("dotenv").config(),
-  bodyParser = require("body-parser"),
-  express = require("express"),
-  app = express(),
-  session = require('express-session'),
-  
-  // app = httpsLocalhost(),
-  // expressSanitizer = require("express-sanitizer"),
-  methodOverride = require("method-override"),
-  mongoose = require("mongoose"),
-  passport = require("passport"),
-  LocalStrategy = require("passport-local"),
-  User = require("./models/user"),
-  serveStatic = require("serve-static"),
-  nodemailer = require("nodemailer"),
-  request = require("request"),
-  // flash = require("connect-flash"),
-  router = express.Router(),
-  httpsLocalhost = require("https-localhost"),
-  // Recaptcha = require('express-recaptcha').RecaptchaV3,
-  // recaptcha = new Recaptcha(process.env.RECAPTCHA_API_SITEKEY, process.env.PRIVATE_RECAPTCHA_API_SECRET, {callback:'cb'}),
-
-  // contactRoutes = require("./routes/contact"),
-  serveStatic = require("serve-static");
+            express = require("express"),
+            app = express(),
+            session = require('express-session'),
+            // app = httpsLocalhost(),
+            // expressSanitizer = require("express-sanitizer"),
+            methodOverride = require("method-override"),
+            mongoose = require("mongoose"),
+            passport = require("passport"),
+            LocalStrategy = require("passport-local"),
+            User = require("./models/user"),
+            serveStatic = require("serve-static"),
+            nodemailer = require("nodemailer"),
+            request = require("request"),
+            router = express.Router(),
+            httpsLocalhost = require("https-localhost"),
+            serveStatic = require("serve-static");
 
 //ssl must be configured on the application level --here
-//uncomment this block when deploying see code at the bottom of this file
+//uncomment this block when deploying, see code at the bottom of this file
+
 if (process.env.ENVIRONMENT === "prod") {
   app.use(function (req, res, next) {
     if (req.get("X-Forwarded-Proto") !== "https") {
@@ -37,9 +31,9 @@ mongoose.connect( process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIn
      .then(() => console.log( 'Database Connected' ))
      .catch(err => console.log( err ));
 
+// mongoose.set("useFindAndModify", false);
 
 
-mongoose.set("useFindAndModify", false);
 app.set("view engine", "ejs");
 
 app.use(express.json());
@@ -50,7 +44,7 @@ app.use(
 );
 // app.use(expressSanitizer());
 app.use(methodOverride("_method"));
-// app.use(flash());
+
 app.use(express.static("public/"));
 
 //passport config
