@@ -62,7 +62,7 @@ app.use(session({
     cookie: {}
   }
   
-  if (app.get(process.env.ENVIRONMENT) === 'production') {
+  if (app.get(process.env.ENVIRONMENT) === 'dev') {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
   }
