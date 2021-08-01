@@ -28,15 +28,33 @@ if (process.env.ENVIRONMENT === "prod") {
   });
 }
 
-// try this from connect-mongo docs
-app.use(session({
-  secret: process.env.secret,
-  store: MongoStore.create({ mongoUrl: process.env.DATABASE_URL })
-}));
 
 mongoose.connect( process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
      .then(() => console.log( 'Database Connected' ))
      .catch(err => console.log( err ));
+
+// try this from connect-mongo docs
+app.use(session({
+  secret: process.env.secret,
+  saveUninitialized: false, // don't create session until something stored
+  resave: false, //don't save session if unmodified
+  store: MongoStore.create({
+    mongoUrl: process.env.DATABASE_URL,
+    touchAfter: 24 * 3600 // time period in seconds
+  })
+}));
+
+
+
+     //passport config when not using connect-mongo
+     
+
+  //from npm docs
+
+  // var sess = {
+  //   secret: process.env.secret,
+  //   cookie: {}
+  // }
 
 mongoose.set("useFindAndModify", false);
 
@@ -54,20 +72,7 @@ app.use(methodOverride("_method"));
 
 app.use(express.static("public/"));
 
-//passport config when not using connect-mongo
-// app.use(session({
-//     secret: process.env.secret,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { secure: true }
-//   }));
 
-  //from npm docs
-
-  // var sess = {
-  //   secret: process.env.secret,
-  //   cookie: {}
-  // }
 
 
 
