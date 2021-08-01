@@ -2,7 +2,7 @@ const dotenv = require("dotenv").config(),
             express = require("express"),
             app = express(),
             session = require('express-session'),
-            MongoStore = require('connect-mongo'),
+            // MongoStore = require('connect-mongo'),
             // app = httpsLocalhost(),
             // expressSanitizer = require("express-sanitizer"),
             methodOverride = require("method-override"),
@@ -29,38 +29,15 @@ if (process.env.ENVIRONMENT === "prod") {
 }
 
 
-mongoose.connect( process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
-     .then(() => console.log( 'Database Connected' ))
-     .catch(err => console.log( err ));
-
-// try this from connect-mongo docs
-app.use(session({
-  secret: process.env.secret,
-  saveUninitialized: false, // don't create session until something stored
-  resave: false, //don't save session if unmodified
-  store: MongoStore.create({
-    mongoUrl: process.env.DATABASE_URL,
-    touchAfter: 24 * 3600 // time period in seconds
-  })
-}));
-
-
-
-     //passport config when not using connect-mongo
-     
-
-  //from npm docs
-
-  // var sess = {
-  //   secret: process.env.secret,
-  //   cookie: {}
-  // }
+mongoose.connect(process.env.DATABASE_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 mongoose.set("useFindAndModify", false);
-
-
 app.set("view engine", "ejs");
 
+console.log("MongoDB is connected");
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -72,9 +49,14 @@ app.use(methodOverride("_method"));
 
 app.use(express.static("public/"));
 
-
-
-
+//passport config
+app.use(
+  require("express-session")({
+    secret: process.env.secret,
+    resave: false,
+    saveUninitialized: false
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -82,7 +64,17 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function (req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
 
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+);
 
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
