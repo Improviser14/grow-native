@@ -55,6 +55,20 @@ app.use(session({
     cookie: { secure: true }
   }));
 
+  //from npm docs
+
+  var sess = {
+    secret: process.env.secret,
+    cookie: {}
+  }
+  
+  if (app.get(process.env.ENVIRONMENT) === 'production') {
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
+  }
+  
+  app.use(session(sess))
+
 
 app.use(passport.initialize());
 app.use(passport.session());
