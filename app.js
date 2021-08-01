@@ -1,7 +1,8 @@
-var dotenv = require("dotenv").config(),
+const dotenv = require("dotenv").config(),
             express = require("express"),
             app = express(),
             session = require('express-session'),
+            MongoStore = require('connect-mongo'),
             // app = httpsLocalhost(),
             // expressSanitizer = require("express-sanitizer"),
             methodOverride = require("method-override"),
@@ -13,8 +14,8 @@ var dotenv = require("dotenv").config(),
             nodemailer = require("nodemailer"),
             request = require("request"),
             router = express.Router(),
-            httpsLocalhost = require("https-localhost"),
-            serveStatic = require("serve-static");
+            httpsLocalhost = require("https-localhost");
+            
 
 //ssl must be configured on the application level --here
 //uncomment this block when deploying, see code at the bottom of this file
@@ -27,11 +28,17 @@ if (process.env.ENVIRONMENT === "prod") {
   });
 }
 
+// try this from connect-mongo docs
+app.use(session({
+  secret: process.env.secret,
+  store: MongoStore.create({ mongoUrl: process.env.DATABASE_URL })
+}));
+
 mongoose.connect( process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
      .then(() => console.log( 'Database Connected' ))
      .catch(err => console.log( err ));
 
-// mongoose.set("useFindAndModify", false);
+mongoose.set("useFindAndModify", false);
 
 
 app.set("view engine", "ejs");
@@ -47,27 +54,21 @@ app.use(methodOverride("_method"));
 
 app.use(express.static("public/"));
 
-//passport config
-app.use(session({
-    secret: process.env.secret,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
-  }));
+//passport config when not using connect-mongo
+// app.use(session({
+//     secret: process.env.secret,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: true }
+//   }));
 
   //from npm docs
 
-  var sess = {
-    secret: process.env.secret,
-    cookie: {}
-  }
-  
-  if (app.get(process.env.ENVIRONMENT) === 'dev') {
-    app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
-  }
-  
-  app.use(session(sess))
+  // var sess = {
+  //   secret: process.env.secret,
+  //   cookie: {}
+  // }
+
 
 
 app.use(passport.initialize());
