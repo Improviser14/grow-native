@@ -1,10 +1,12 @@
 const dotenv = require("dotenv").config(),
             express = require("express"),
             app = express(),
-            session = require('express-session'),
+            // session = require('express-session'),
+           
             // MongoStore = require('connect-mongo'),
             // app = httpsLocalhost(),
             // expressSanitizer = require("express-sanitizer"),
+            session = require('cookie-session'),
             methodOverride = require("method-override"),
             mongoose = require("mongoose"),
             passport = require("passport"),
