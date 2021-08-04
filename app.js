@@ -44,6 +44,7 @@ app.use(
     extended: true,
   })
 );
+
 // app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
@@ -71,13 +72,6 @@ app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
   next();
 });
-
-app.use(express.json());
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
 
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
