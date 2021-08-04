@@ -6,7 +6,7 @@ const dotenv = require("dotenv").config(),
   // MongoStore = require('connect-mongo'),
   // app = httpsLocalhost(),
   // expressSanitizer = require("express-sanitizer"),
-  session = require("cookie-session"),
+  cookieSession = require("cookie-session"),
   methodOverride = require("method-override"),
   mongoose = require("mongoose"),
   passport = require("passport"),
@@ -59,6 +59,24 @@ app.use(express.static("public/"));
 //     saveUninitialized: false
 //   })
 // );
+
+app.set("trust proxy", 1); // trust first proxy
+
+// cookie-session config
+app.use(
+  require("cookie-session")({
+    name: "session",
+    keys: ["key1", "key2"],
+  })
+);
+
+app.use(function (req, res, next) {
+  // Update views
+  req.session.views = (req.session.views || 0) + 1;
+
+  // Write response
+  res.end(req.session.views + " views");
+});
 
 app.use(passport.initialize());
 
