@@ -1,23 +1,22 @@
 const dotenv = require("dotenv").config(),
-            express = require("express"),
-            app = express(),
-            // session = require('express-session'),
-           
-            // MongoStore = require('connect-mongo'),
-            // app = httpsLocalhost(),
-            // expressSanitizer = require("express-sanitizer"),
-            session = require('cookie-session'),
-            methodOverride = require("method-override"),
-            mongoose = require("mongoose"),
-            passport = require("passport"),
-            LocalStrategy = require("passport-local"),
-            User = require("./models/user"),
-            serveStatic = require("serve-static"),
-            nodemailer = require("nodemailer"),
-            request = require("request"),
-            router = express.Router(),
-            httpsLocalhost = require("https-localhost");
-            
+  express = require("express"),
+  app = express(),
+  // session = require('express-session'),
+
+  // MongoStore = require('connect-mongo'),
+  // app = httpsLocalhost(),
+  // expressSanitizer = require("express-sanitizer"),
+  session = require("cookie-session"),
+  methodOverride = require("method-override"),
+  mongoose = require("mongoose"),
+  passport = require("passport"),
+  LocalStrategy = require("passport-local"),
+  User = require("./models/user"),
+  serveStatic = require("serve-static"),
+  nodemailer = require("nodemailer"),
+  request = require("request"),
+  router = express.Router(),
+  httpsLocalhost = require("https-localhost");
 
 //ssl must be configured on the application level --here
 //uncomment this block when deploying, see code at the bottom of this file
@@ -30,20 +29,19 @@ if (process.env.ENVIRONMENT === "prod") {
   });
 }
 
-
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
-mongoose.set("useFindAndModify", false);
 app.set("view engine", "ejs");
 
 console.log("MongoDB is connected");
 app.use(express.json());
 app.use(
   express.urlencoded({
-    extended: true
+    extended: true,
   })
 );
 // app.use(expressSanitizer());
@@ -52,16 +50,19 @@ app.use(methodOverride("_method"));
 app.use(express.static("public/"));
 
 //passport config
-app.use(
-  require("express-session")({
-    secret: process.env.secret,
-    resave: false,
-    saveUninitialized: false
-  })
-);
+
+// app.use(
+//   require("express-session")({
+//     secret: process.env.secret,
+//     resave: false,
+//     saveUninitialized: false
+//   })
+// );
 
 app.use(passport.initialize());
+
 app.use(passport.session());
+
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -74,7 +75,7 @@ app.use(function (req, res, next) {
 app.use(express.json());
 app.use(
   express.urlencoded({
-    extended: true
+    extended: true,
   })
 );
 
@@ -91,15 +92,11 @@ var blogSchema = new mongoose.Schema({
   body: String,
   created: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-
-
 var Blog = mongoose.model("Blog", blogSchema);
-
-
 
 app.get("/index", function (req, res) {
   console.log(req.user || "no user logged in");
@@ -110,7 +107,7 @@ app.get("/index", function (req, res) {
     } else {
       res.render("index", {
         blogs: blogs,
-        currentUser: req.user
+        currentUser: req.user,
       });
     }
   });
@@ -141,7 +138,7 @@ app.get("/index/:id", function (req, res) {
       res.redirect("/index");
     } else {
       res.render("show", {
-        blog: blog
+        blog: blog,
       });
     }
   });
@@ -154,7 +151,7 @@ app.get("/index/:id/edit", isLoggedIn, function (req, res) {
       res.redirect("/index");
     } else {
       res.render("edit", {
-        blog: blog
+        blog: blog,
       });
     }
   });
@@ -185,7 +182,6 @@ app.delete("/blogs/:id", isLoggedIn, function (req, res) {
   });
 });
 
-
 //AUTH ROUTES
 
 //show register form
@@ -196,7 +192,7 @@ app.get("/register", function (req, res) {
 //handle sign up logic
 app.post("/register", function (req, res) {
   var newUser = new User({
-    username: req.body.username
+    username: req.body.username,
   });
   if (req.body.adminCode === process.env.isAdmin) {
     newUser.isAdmin = true;
@@ -223,9 +219,9 @@ app.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/index",
-    failureRedirect: "/login"
+    failureRedirect: "/login",
   }),
-  function (req, res) { }
+  function (req, res) {}
 );
 
 //logout
@@ -254,14 +250,11 @@ app.get("/", function (req, res) {
 
 // app.set('port', (process.env.PORT || 5000));
 
-
-
 // app.use("/contact", contactRoutes);
 
 // app.get("/contactMe", function (req, res) {
 //   res.render("contactMe");
 // });
-
 
 if (process.env.ENVIRONMENT === "prod") {
   // sets port 8080 to default or unless otherwise specified in the environment
@@ -270,7 +263,6 @@ if (process.env.ENVIRONMENT === "prod") {
 } else {
   app.listen(8080, "0.0.0.0");
 }
-
 
 // if (process.env.ENVIRONMENT === "prod") {
 //   app.listen(process.env.PORT || 5000);
