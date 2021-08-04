@@ -18,10 +18,10 @@ const dotenv = require("dotenv").config(),
   router = express.Router();
 
 // Monkey patch before you require http for the first time.
-process.binding("http_parser").HTTPParser =
-  require("http-parser-js").HTTPParser;
+// process.binding("http_parser").HTTPParser =
+//   require("http-parser-js").HTTPParser;
 
-var http = require("http");
+// var http = require("http");
 var httpsLocalhost = require("https-localhost");
 
 //ssl must be configured on the application level --here
