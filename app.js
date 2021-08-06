@@ -1,11 +1,7 @@
 const dotenv = require("dotenv").config(),
   express = require("express"),
   app = express(),
-  // session = require('express-session'),
-
-  // MongoStore = require('connect-mongo'),
-  // app = httpsLocalhost(),
-  // expressSanitizer = require("express-sanitizer"),
+  expressSanitizer = require("express-sanitizer"),
   cookieSession = require("cookie-session"),
   methodOverride = require("method-override"),
   mongoose = require("mongoose"),
@@ -46,20 +42,10 @@ app.use(
   })
 );
 
-// app.use(expressSanitizer());
+app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
 app.use(express.static("public/"));
-
-//passport config
-
-// app.use(
-//   require("express-session")({
-//     secret: process.env.secret,
-//     resave: false,
-//     saveUninitialized: false
-//   })
-// );
 
 app.set("trust proxy", 1); // trust first proxy
 
@@ -253,14 +239,6 @@ app.get("/", function (req, res) {
   res.render("landing");
 });
 
-// app.set('port', (process.env.PORT || 5000));
-
-// app.use("/contact", contactRoutes);
-
-// app.get("/contactMe", function (req, res) {
-//   res.render("contactMe");
-// });
-
 if (process.env.ENVIRONMENT === "prod") {
   // sets port 8080 to default or unless otherwise specified in the environment
   app.set("port", process.env.PORT || 80);
@@ -269,6 +247,3 @@ if (process.env.ENVIRONMENT === "prod") {
   app.listen(8080, "0.0.0.0");
 }
 
-// if (process.env.ENVIRONMENT === "prod") {
-//   app.listen(process.env.PORT || 5000);
-// }
