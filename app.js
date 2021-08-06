@@ -9,7 +9,6 @@ const dotenv = require("dotenv").config(),
   LocalStrategy = require("passport-local"),
   User = require("./models/user"),
   serveStatic = require("serve-static"),
-  nodemailer = require("nodemailer"),
   request = require("request"),
   router = express.Router();
   httpsLocalhost = require("https-localhost");
