@@ -16,13 +16,7 @@ const dotenv = require("dotenv").config(),
   nodemailer = require("nodemailer"),
   request = require("request"),
   router = express.Router();
-
-// Monkey patch before you require http for the first time.
-// process.binding("http_parser").HTTPParser =
-//   require("http-parser-js").HTTPParser;
-
-// var http = require("http");
-var httpsLocalhost = require("https-localhost");
+  httpsLocalhost = require("https-localhost");
 
 //ssl must be configured on the application level --here
 //uncomment this block when deploying, see code at the bottom of this file
@@ -35,15 +29,11 @@ if (process.env.ENVIRONMENT === "prod") {
   });
 }
 
-mongoose.set("useNewUrlParser", true);
-mongoose.set("useFindAndModify", false);
-mongoose.set("useCreateIndex", true);
-mongoose.set("useUnifiedTopology", true);
-
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
+  useCreateIndex: true
 });
 
 app.set("view engine", "ejs");
@@ -52,7 +42,7 @@ console.log("MongoDB is connected");
 app.use(express.json());
 app.use(
   express.urlencoded({
-    extended: true,
+    extended: true
   })
 );
 
@@ -77,17 +67,9 @@ app.set("trust proxy", 1); // trust first proxy
 app.use(
   require("cookie-session")({
     name: "session",
-    keys: ["key1", "key2"],
+    keys: ["key1", "key2"]
   })
 );
-
-app.use(function (req, res, next) {
-  // Update views
-  req.session.views = (req.session.views || 0) + 1;
-
-  // Write response
-  res.end(req.session.views + " views");
-});
 
 app.use(passport.initialize());
 
@@ -115,7 +97,7 @@ var blogSchema = new mongoose.Schema({
   body: String,
   created: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
 });
 
@@ -130,7 +112,7 @@ app.get("/index", function (req, res) {
     } else {
       res.render("index", {
         blogs: blogs,
-        currentUser: req.user,
+        currentUser: req.user
       });
     }
   });
@@ -161,7 +143,7 @@ app.get("/index/:id", function (req, res) {
       res.redirect("/index");
     } else {
       res.render("show", {
-        blog: blog,
+        blog: blog
       });
     }
   });
@@ -174,7 +156,7 @@ app.get("/index/:id/edit", isLoggedIn, function (req, res) {
       res.redirect("/index");
     } else {
       res.render("edit", {
-        blog: blog,
+        blog: blog
       });
     }
   });
@@ -215,7 +197,7 @@ app.get("/register", function (req, res) {
 //handle sign up logic
 app.post("/register", function (req, res) {
   var newUser = new User({
-    username: req.body.username,
+    username: req.body.username
   });
   if (req.body.adminCode === process.env.isAdmin) {
     newUser.isAdmin = true;
