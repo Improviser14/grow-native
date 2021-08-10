@@ -10,7 +10,7 @@ const dotenv = require("dotenv").config(),
   User = require("./models/user"),
   serveStatic = require("serve-static"),
   request = require("request"),
-  router = express.Router();
+  router = express.Router(),
   httpsLocalhost = require("https-localhost");
 
 //ssl must be configured on the application level --here
@@ -19,7 +19,7 @@ const dotenv = require("dotenv").config(),
 if (process.env.ENVIRONMENT === "prod") {
   app.use(function (req, res, next) {
     if (req.get("X-Forwarded-Proto") !== "https") {
-      res.redirect("https://" + req.get("Host") + req.url);
+      res.redirect("https://" + req.get("Host") + req.url);heroku logs --tail
     } else next();
   });
 }
