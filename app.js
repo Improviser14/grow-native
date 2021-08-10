@@ -19,7 +19,7 @@ const dotenv = require("dotenv").config(),
 if (process.env.ENVIRONMENT === "prod") {
   app.use(function (req, res, next) {
     if (req.get("X-Forwarded-Proto") !== "https") {
-      res.redirect("https://" + req.get("Host") + req.url);heroku logs --tail
+      res.redirect("https://" + req.get("Host") + req.url);
     } else next();
   });
 }
