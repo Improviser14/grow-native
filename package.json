@@ -18,7 +18,7 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
-    "express-sanitizer": "^1.0.5",
+    "express-sanitizer": "^1.0.6",
     "express-session": "^1.17.2",
     "http-parser-js": "^0.5.3",
     "https-localhost": "^4.5.2",
