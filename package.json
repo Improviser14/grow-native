@@ -1,6 +1,9 @@
 {
   "name": "grow_native",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.17.4"
+  },
   "description": "mom's app",
   "main": "app.js",
   "scripts": {
