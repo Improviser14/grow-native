@@ -10,8 +10,9 @@ const dotenv = require("dotenv").config(),
   User = require("./models/user"),
   serveStatic = require("serve-static"),
   request = require("request"),
-  router = express.Router(),
-  httpsLocalhost = require("https-localhost");
+  // httpsLocalhost = require("https-localhost"),
+  router = express.Router();
+  
 
 //ssl must be configured on the application level --here
 //uncomment this block when deploying, see code at the bottom of this file
@@ -41,12 +42,14 @@ app.use(
   })
 );
 
+// configure this to your standards. I just filter out <script> tags as my default then customize as needed
+
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
 app.use(express.static("public/"));
-
-app.set("trust proxy", 1); // trust first proxy
+// trust first proxy
+// app.set("trust proxy", 1); 
 
 // cookie-session config
 app.use(
@@ -74,6 +77,15 @@ app.use(function (req, res, next) {
   next();
 });
 
+
+//middleware
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
+
 //BLOG ROUTES
 //Mongoose/model config
 var blogSchema = new mongoose.Schema({
@@ -87,6 +99,10 @@ var blogSchema = new mongoose.Schema({
 });
 
 var Blog = mongoose.model("Blog", blogSchema);
+
+app.get("/", function (req, res) {
+  res.render("landing");
+});
 
 app.get("/index", function (req, res) {
   console.log(req.user || "no user logged in");
@@ -220,13 +236,7 @@ app.get("/logout", function (req, res) {
   res.redirect("/index");
 });
 
-//middleware
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
+
 
 //BIO PAGE
 
@@ -234,15 +244,18 @@ app.get("/bio", function (req, res) {
   res.render("bio");
 });
 
-app.get("/", function (req, res) {
-  res.render("landing");
-});
+
 
 if (process.env.ENVIRONMENT === "prod") {
   // sets port 8080 to default or unless otherwise specified in the environment
+ 
   app.set("port", process.env.PORT || 80);
+  console.log(`listening on : ${app.get('port')}`)
   app.listen(app.get("port"));
+
 } else {
+  console.log(`listening on : 8080`)
   app.listen(8080, "127.0.0.1");
 }
 
+console.log("made it to the end of the file");

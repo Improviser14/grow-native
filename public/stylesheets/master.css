@@ -1,10 +1,18 @@
 /* landing page css */
 html * {
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Comforter Brush', serif;
 }
 
 .background{
-  background-image: url("https://images.unsplash.com/photo-1565041222041-db9ebdda950a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80");
+  background-image: url("https://images.unsplash.com/photo-1626457296828-e3b649dd4f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+}
+
+.background{
+  background-position: center center;
+}
+
+.background{
+  background-size :cover;
 }
 
 
@@ -51,12 +59,7 @@ form {
   padding: 0;
 }
 
-/* #logo {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    height: auto;
-} */
+
 
 .date {
   font-style: italic;
@@ -69,33 +72,16 @@ form {
 #header {
   font-style: italic;
   letter-spacing:  inherit;
-  font-size: medium
-;
-/* #header a {
-  font-style: italic;
   font-size: medium;
-} */
-
-
-#col1 {
-  margin-top: 60px;
-  padding-top: 60px;
 }
 
-#col4 {
-  padding-top: 60px;
-  padding-bottom: 60px;
+.header item{
+  padding-top:300px;
 }
 
-.basic.button {
-  margin: 1em;
+.nav-item{
+  padding-top: 15px;
 }
 
-.description a {
-  font-size: 15px;
-}
 
-.description p {
-  padding: 5px;
-  letter-spacing:  normal;
-}
+

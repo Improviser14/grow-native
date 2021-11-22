@@ -1,0 +1,74 @@
+i.icon {
+  font-size: 2em;
+  padding-top: 0.3em;
+}
+
+.ui .container{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.container.main {
+  margin-top: 7em;
+  padding-top: .5em;
+}
+
+form {
+  padding-top: 80px;
+}
+
+.container {
+  padding-top: .2em;
+  padding-bottom: 1em;
+}
+
+.fixed-menu {
+  padding-top: 10px;
+}
+
+#delete {
+  display: inline;
+}
+
+.ui .items .item .image {
+  position: relative;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  display: block;
+  float: none;
+  margin: 0;
+  padding: 0;
+}
+
+#logo {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    height: auto;
+}
+
+.date {
+  font-style: italic;
+}
+
+.meta {
+  margin-top: 20px;
+}
+
+#header {
+  font-style: italic;
+  letter-spacing:  inherit;
+  font-size: medium
+;
+}
+
+i.leaf.icon{
+  padding-top: 0px;
+}
+
+h1{ 
+  padding-top: 100px;
+}
+
+
+

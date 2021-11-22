@@ -19,4 +19,4 @@ var blogSchema = new mongoose.Schema({
   }
 });
 
-exports.blog = blog;
+module.exports.blog = blog;
