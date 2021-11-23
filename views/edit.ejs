@@ -42,7 +42,7 @@
     <!-- change classes from semantic ui to bootstrap -->
 
     <div class="ui main text container segment">
-      <header class="ui huge header">Edit Blog Post<br />
+      <header class="ui huge header" id="editHeader">Edit Blog Post<br />
         <%= blog.title %>
       </header>
       <form class="ui form" action="/index/<%= blog._id %>?_method=PUT" method="POST">
@@ -58,7 +58,7 @@
           <label>Blog Content</label>
           <textarea name="blog[body]"><%= blog.body %></textarea>
         </div>
-        <input class="ui violet basic button" type="submit" />
+        <input class="ui green basic button" type="submit" />
       </form>
     </div>
 

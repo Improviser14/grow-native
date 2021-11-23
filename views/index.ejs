@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-  <link rel="stylesheet" type="text/css" href="/master.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/master.css"> -->
   <link rel="stylesheet" type="text/css" href="./stylesheets/blog.css">
   <link rel="stylesheet" type="text/css"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -42,8 +42,9 @@
 
   <div class="ui main text container">
     <% if(currentUser && currentUser.isAdmin){ %>
-      <h1>
-        <%= currentUser.username %> has admin priviledges and is authorized to edit and delete blog posts.
+      <h1 id="adminPriviledges">
+        <%= currentUser.username %>
+          <h3>has admin priviledges and is authorized to edit and delete blog posts.</h3>
       </h1>
       <% } %>
 

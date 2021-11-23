@@ -3,13 +3,22 @@ i.icon {
   padding-top: 0.3em;
 }
 
+#col1{
+padding-top: 120px;
+}
+
 .ui .container{
   padding-top: 50px;
   padding-bottom: 50px;
 }
 .container.main {
   margin-top: 7em;
-  padding-top: .5em;
+  padding-top: 7em;
+}
+
+#header {
+  padding-top:20px;
+  padding-bottom: 0%;
 }
 
 form {
@@ -24,6 +33,11 @@ form {
 .fixed-menu {
   padding-top: 10px;
 }
+
+#adminPriviledges{
+  padding-top: 20px;
+}
+
 
 #delete {
   display: inline;
@@ -56,10 +70,10 @@ form {
 }
 
 #header {
-  font-style: italic;
+  font-style: inherit;
   letter-spacing:  inherit;
-  font-size: medium
-;
+  font-size: medium;
+
 }
 
 i.leaf.icon{
@@ -71,4 +85,17 @@ h1{
 }
 
 
+#editButton{
+  display:flexbox;
+  margin-top: 1em;
+}
 
+.showTitle{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#editHeader{
+  padding-top: 20px;
+  padding-bottom: 0px;
+}

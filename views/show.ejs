@@ -37,8 +37,8 @@
     </div>
   </div>
 
-  <div class="ui main text container segment">
-    <header id="header" class="ui centered huge header">
+  <div class="ui main text container segment" id="showTitle">
+    <header id="header" class="showTitle ui centered huge header">
       <%= blog.title %>
     </header>
     <div class="ui top attached segment">
@@ -55,7 +55,7 @@
           </p>
         </div>
         <% if(currentUser && currentUser.isAdmin){ %>
-          <a class="ui yellow basic button" href="/index/<%= blog._id %>/edit">Edit Blog Post</a>
+          <a class="ui yellow basic button" id="editButton" i href="/index/<%= blog._id %>/edit">Edit Blog Post</a>
           <form method="POST" id="delete" action="/blogs/<%= blog._id %>?_method=DELETE">
 
             <!-- <script>
