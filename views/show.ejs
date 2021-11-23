@@ -33,7 +33,7 @@
       </div>
       <div class="header item"><i class="leaf icon green"></i><a href="/index" class="item">Rose's Blog</a></div>
       <!--<a href="/" class="item">THP homepage</a>-->
-      <a href="/new" class="item">New Post</a>
+      <!-- <a href="/new" class="item">New Post</a> -->
     </div>
   </div>
 
@@ -83,6 +83,7 @@
         <!--comment out this line once everyone is given admin priviledges -->
         <!-- <a href="/register" class="item">New User</a> -->
         <% } else { %>
+          <a href="/new" class="item">New Post</a>
           <a href="/logout" class="item">Logout</a>
           <a href="#" class="item"> Signed in as
             <%= currentUser.username %>
