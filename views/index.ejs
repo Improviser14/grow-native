@@ -42,11 +42,12 @@
   </div>
 
   <div class="ui main text container">
+    <!-- add this block back in if Mom want to be able to add other users -->
     <% if(currentUser && currentUser.isAdmin){ %>
-      <h1 id="adminPriviledges">
-        <%= currentUser.username %>
-          <h3>has admin priviledges and is authorized to edit and delete blog posts.</h3>
-      </h1>
+      <!-- <h1 id="adminPriviledges"> -->
+      <!-- <%= currentUser.username %> -->
+      <!-- <h3>has admin priviledges and is authorized to edit and delete blog posts.</h3>
+      </h1> -->
       <% } %>
 
         <div class="ui top attached segment">

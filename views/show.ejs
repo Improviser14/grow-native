@@ -45,6 +45,7 @@
       <div class="item">
         <img class="ui centered large image" src="<%= blog.image %>" />
         <div class="meta">
+
           <span class="date">
             <%= blog.created.toDateString() %>
           </span>
@@ -55,7 +56,9 @@
           </p>
         </div>
         <% if(currentUser && currentUser.isAdmin){ %>
-          <a class="ui yellow basic button" id="editButton" i href="/index/<%= blog._id %>/edit">Edit Blog Post</a>
+
+          <!-- or if currentUser.createdBy = id -->
+          <a class="ui yellow basic button" id="editButton" href="/index/<%= blog._id %>/edit">Edit Blog Post</a>
           <form method="POST" id="delete" action="/blogs/<%= blog._id %>?_method=DELETE">
 
             <!-- <script>

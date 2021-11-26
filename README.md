@@ -10,4 +10,3 @@ On the front-end, the trinity is used of course (javaScript, HTML5, CSS3) as wel
 
 Permissioned actions allow users to add, edit, and delete posts
 
-Improvements are welcome via pull request
